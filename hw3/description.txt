@@ -1,0 +1,5 @@
+Name: Ethan Lew 
+Group: <None>
+Toolchain: vim/g++
+
+I encapsulated the couting in a class. For the reverse file, though, it didn't make too much sense to make it an object (to me). I prototyped it as a function and then implemented it. 
