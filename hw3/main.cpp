@@ -30,8 +30,6 @@ int main(int argc, char *argv[])
 	cout << "\nNum of lines with 2 digits and 3 lower-case: " << count.getNumDigits2() << endl;
 
 	cout << endl << "\n Wrote file to disk." << endl;
-	std::string test = "This is a line";
-	cout << endl << revWordInStr(test) << endl;
 
 	return 0;
 }
