@@ -19,7 +19,40 @@ bool fileExists(const std::string& name)
 }
 
 
-std::string revWordInStr(std::string &words) 
+void revFile(std::string &fileName)
+{
+	std::ifstream file;
+	std::ofstream out;
+	std::string revName;
+	std::string tempStr;
+	std::string line;
+	std::string con;
+
+	for (int i = fileName.size() - 1; i >= 0; i--)
+	{
+		revName += fileName[i];
+	}
+
+	file.open(fileName.c_str());
+	out.open(revName.c_str());
+
+	while (file.peek() != EOF)
+	{
+		tempStr = "";
+		getline(file, line);
+		/*for (int i = line.size() - 1; i >= 0; i--)
+		{
+		tempStr += line[i];
+		}*/
+		tempStr = revWordInStr(line);
+		out << tempStr << std::endl;
+	}
+	file.close();
+	out.close();
+	return;
+}
+
+std::string revWordInStr(std::string &words)
 {
 	std::string revStr = "";
 	char blank = ' ';
@@ -45,38 +78,9 @@ std::string revWordInStr(std::string &words)
 
 	}
 
-void revFile(std::string &fileName)
-{
-	std::ifstream file;
-	std::ofstream out;
-	std::string revName;
-	std::string tempStr;
-	std::string line;
-	std::string con;
-
-	for (int i = fileName.size() - 1; i >= 0; i--)
-	{
-		revName += fileName[i];
-	}
-
-	file.open(fileName.c_str());
-	out.open(revName.c_str());
-
-	while (file.peek() != EOF)
-	{
-		tempStr = "";
-		getline(file, line);
-		/*for (int i = line.size() - 1; i >= 0; i--)
-		{
-			tempStr += line[i];
-		}*/
-		tempStr = revWordInStr(line);
-		out << tempStr << std::endl;
-	}
-	file.close();
-	out.close();
-	return;
+	return revStr;
 }
+
 
 int wordInStr(std::string sentence) {
 	int numberOfWords = 0;
@@ -118,13 +122,28 @@ unsigned int lowerInStr(const std::string& s)
 
 }
 
+unsigned int upperInStr(const std::string& s)
+{
+	unsigned int count = 0;
+	for (int i = 0; i < s.length(); i++)//for each char in string,
+		if ((isupper(s[i])))
+		{
+			count += 1;
+		}
+	return count;
+
+}
+
 Counter::Counter(std::ifstream &file)
 {
 	numWords = 0;
 	numChars = 0;
 	numLines = 0;
 	numDigits = 0;
-	numDigits2 = 0;
+	numLower = 0;
+	numUpper = 0;
+	lineCond = 0;
+	lineCond2 = 0;
 	std::string word;
 	std::string line;
 
@@ -135,12 +154,15 @@ Counter::Counter(std::ifstream &file)
 		getline(file, line);
 		numWords += wordInStr(line);
 		numChars += line.length();
+		numDigits += numInStr(line);
+		numLower += lowerInStr(line);
+		numUpper += upperInStr(line);
 		if ((numInStr(line) >= 1) && (lowerInStr(line)>=1))
 		{
-			numDigits += 1;
+			lineCond += 1;
 			if ((numInStr(line) >= 2) && (lowerInStr(line) >= 3))
 			{
-				numDigits2 += 1;
+				lineCond2 += 1;
 			}
 		}
 
@@ -154,7 +176,7 @@ Counter::Counter(std::string string)
 	numLines = 1;
 	numChars = 0;
 	numDigits = 0;
-	numDigits2 = 0;
+	numLower = 0;
 
 	numChars += string.length();
 
@@ -163,7 +185,7 @@ Counter::Counter(std::string string)
 		numDigits += 1;
 		if ((numInStr(string) >= 2) && (lowerInStr(string) >= 3))
 		{
-			numDigits2 += 1;
+			numLower += 1;
 		}
 	}
 
@@ -173,14 +195,14 @@ Counter::~Counter()
 {
 }
 
-unsigned int Counter::getNumDigits()
+unsigned int Counter::getCond()
 {
-	return numDigits;
+	return lineCond;
 }
 
-unsigned int Counter::getNumDigits2()
+unsigned int Counter::getCond2()
 {
-	return numDigits2;
+	return lineCond2;
 }
 
 unsigned int Counter::getNumChars()
@@ -191,4 +213,19 @@ unsigned int Counter::getNumChars()
 unsigned int Counter::getNumWords()
 {
 	return numWords;
+}
+
+unsigned Counter::getNumDigits()
+{
+	return numDigits;
+}
+
+unsigned Counter::getNumLower()
+{
+	return numLower;
+}
+
+unsigned Counter::getNumUpper()
+{
+	return numUpper;
 }
