@@ -15,21 +15,27 @@ namespace fileData
 	{
 	public:
 
-		unsigned int getNumDigits();
-		unsigned int getNumDigits2();
+		unsigned int getCond();
+		unsigned int getCond2();
 		//unsigned int getNumLines();
 		unsigned int getNumChars();
 		unsigned int getNumWords();
+		unsigned getNumDigits();
+		unsigned getNumLower();
+		unsigned getNumUpper();
 		Counter(std::ifstream &file);
 		Counter(std::string string);
 		~Counter();
 
 	private:
 		unsigned int numDigits;
-		unsigned int numDigits2;
+		unsigned int numLower;
 		unsigned int numLines;
 		unsigned int numChars;
 		unsigned int numWords;
+		unsigned lineCond;
+		unsigned lineCond2;
+		unsigned numUpper;
 
 	};
 
