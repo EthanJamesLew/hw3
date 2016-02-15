@@ -18,6 +18,33 @@ bool fileExists(const std::string& name)
 	}
 }
 
+
+std::string revWordInStr(std::string &words) 
+{
+	std::string revStr = "";
+	char blank = ' ';
+	std::string tempStr = "";
+	int count = 0;
+	for (; count <= words.size(); count++)
+	{
+		if (words[count] == ' ' || count == words.size() - 1)
+		{
+			tempStr += words[count];
+			if (count == words.size() - 1)
+			{
+				tempStr += " ";
+			}
+			revStr.insert(0, tempStr);
+			//Rev temp str and add it to revStr
+			tempStr = "";
+		}
+		else
+		{
+			tempStr += words[count];
+		}
+
+	}
+
 void revFile(std::string &fileName)
 {
 	std::ifstream file;
