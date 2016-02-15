@@ -1,6 +1,6 @@
 #include"counter.h"
 #include <fstream>
-#include<string>;
+#include<string>
 #include<stdio.h>
 #include<iostream>
 using namespace fileData;
@@ -39,46 +39,15 @@ void revFile(std::string &fileName)
 	{
 		tempStr = "";
 		getline(file, line);
-		/*for (int i = line.size() - 1; i >= 0; i--)
+		for (int i = line.size() - 1; i >= 0; i--)
 		{
 			tempStr += line[i];
-		}*/
-		tempStr = revWordInStr(line);
+		}
 		out << tempStr << std::endl;
 	}
 	file.close();
 	out.close();
 	return;
-}
-
-std::string revWordInStr(std::string &words) 
-{
-	std::string revStr = "";
-	char blank = ' ';
-	std::string tempStr = "";
-	int count = 0;
-	for (; count <= words.size(); count++)
-	{
-		if (words[count] == ' ' || count == words.size() - 1)
-		{
-			tempStr += words[count];
-			if (count == words.size() - 1)
-			{
-				tempStr += " ";
-			}
-			revStr.insert(0, tempStr);
-			//Rev temp str and add it to revStr
-			tempStr = "";
-		}
-		else
-		{
-			tempStr += words[count];
-		}
-
-	}
-
-
-	return revStr;
 }
 
 int wordInStr(std::string sentence) {
@@ -134,8 +103,9 @@ Counter::Counter(std::ifstream &file)
 	//Read by word
 	while (file.peek() != EOF)
 	{
+		
 		getline(file, line);
-		numWords += 1;
+		numWords += wordInStr(line);
 		numChars += line.length();
 		if ((numInStr(line) >= 1) && (lowerInStr(line)>=1))
 		{
