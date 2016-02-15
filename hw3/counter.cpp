@@ -39,10 +39,11 @@ void revFile(std::string &fileName)
 	{
 		tempStr = "";
 		getline(file, line);
-		for (int i = line.size() - 1; i >= 0; i--)
+		/*for (int i = line.size() - 1; i >= 0; i--)
 		{
 			tempStr += line[i];
-		}
+		}*/
+		tempStr = revWordInStr(line);
 		out << tempStr << std::endl;
 	}
 	file.close();
